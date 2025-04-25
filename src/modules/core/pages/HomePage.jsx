@@ -89,7 +89,7 @@ export default function HomePage() {
         >
           {carouselItems.map((item, index) => (
             <SwiperSlide key={index} className="relative">
-              <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBtb2JpbGUlMjBsZWdlbmRzJTIwZS1zcG9ydHMlMjB0ZWFtJTIwcG9zaW5nJTIwdG9nZXRoZXIlMjBpbiUyMGdhbWluZyUyMGplcnNleXN8ZW58MHx8fHwxNzQ1NTY3MzUyfDA&ixlib=rb-4.0.3&q=80&w=1080" 
+              <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw3fHxwcm9mZXNzaW9uYWwlMjBtb2JpbGUlMjBsZWdlbmRzJTIwZS1zcG9ydHMlMjB0ZWFtJTIwcG9zaW5nJTIwdG9nZXRoZXIlMjBpbiUyMGdhbWluZyUyMGplcnNleXN8ZW58MHx8fHwxNzQ1NTY3MzUyfDA&ixlib=rb-4.0.3&q=80&w=1080" 
                 src={item.bgImage} 
                 alt={item.bgImageAlt}
                 data-image-request={item.bgImageRequest}
@@ -142,7 +142,7 @@ export default function HomePage() {
                 latestPosts.map(post => (
                   <div key={post.id} className="frost-card transition-transform hover:-translate-y-1 hover:shadow-lg">
                     <div className="h-48 overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1533022139390-e31c488d69e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwxMHx8JTYwbW9iaWxlJTIwbGVnZW5kcyUyMCUyNCU3QnJvbGUudG9Mb3dlckNhc2UlMjglMjl8ZW58MHx8fHwxNzQ1NTY3MzUzfDA&ixlib=rb-4.0.3&q=80&w=1080" 
+                      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwzfHwlNjBtb2JpbGUlMjBsZWdlbmRzJTIwJTI0JTdCcm9sZS50b0xvd2VyQ2FzZSUyOCUyOXxlbnwwfHx8fDE3NDU1NjczNTN8MA&ixlib=rb-4.0.3&q=80&w=1080" 
                         src={post.imageUrl || "PLACEHOLDER"} 
                         data-image-request={!post.imageUrl ? "mobile legends gameplay action shot" : ""}
                         alt={post.title}
