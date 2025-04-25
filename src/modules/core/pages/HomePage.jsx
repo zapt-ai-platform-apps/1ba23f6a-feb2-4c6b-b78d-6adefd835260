@@ -89,14 +89,14 @@ export default function HomePage() {
         >
           {carouselItems.map((item, index) => (
             <SwiperSlide key={index} className="relative">
-              <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw0fHxlc3BvcnRzJTIwdGVhbSUyMHBvc2luZyUyMHRvZ2V0aGVyJTIwaW4lMjBnYW1pbmclMjBqZXJzZXlzfGVufDB8fHx8MTc0NTU2ODcxMnww&ixlib=rb-4.0.3&q=80&w=1080" 
+              <img src="https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtb2JpbGUlMjBsZWdlbmRzJTIwdGVhbSUyMHBvc2luZyUyMHRvZ2V0aGVyfGVufDB8fHx8MTc0NTU2OTAzM3ww&ixlib=rb-4.0.3&q=80&w=1080" 
                 src={item.bgImage} 
                 alt={item.bgImageAlt}
                 data-image-request={item.bgImageRequest}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 md:pl-12">
               <h2 className="text-2xl md:text-3xl font-orbitron font-bold mb-6 text-frost-800">
                 Tentang Frost Warlord
               </h2>
@@ -125,6 +125,35 @@ export default function HomePage() {
         </div>
       </section>
       
+      {/* Team Members */}
+      <section className="py-16 bg-gradient-to-r from-frost-900 to-ice-900 text-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-orbitron font-bold mb-8 text-center">
+            Tim Utama
+          </h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {['Jungler', 'Gold Lane', 'Mid Lane', 'Exp Lane', 'Roamer'].map((role, index) => (
+              <div key={index} className="bg-frost-800 bg-opacity-50 p-4 rounded-lg text-center border border-frost-700">
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwxfHwlNjBwcm9mZXNzaW9uYWwlMjBtb2JpbGUlMjBsZWdlbmRzJTIwJTI0JTdCcm9sZXxlbnwwfHx8fDE3NDU1NjkwMzR8MA&ixlib=rb-4.0.3&q=80&w=1080" 
+                   
+                  alt={`${role} player`}
+                  data-image-request={`professional mobile legends ${role} player portrait`}
+                  className="w-24 h-24 mx-auto rounded-full mb-3 object-cover border-2 border-frost-400"
+                />
+                <h3 className="font-orbitron font-bold text-lg mb-1">
+                  {['Frost King', 'Ice Ranger', 'Cryo Mage', 'Blizzard', 'Glacier'][index]}
+                </h3>
+                <p className="text-frost-300 mb-2">{role}</p>
+                <p className="text-sm text-frost-100">
+                  Pro player dengan pengalaman lebih dari 3 tahun
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
       {/* Latest News */}
       <section className="py-16 bg-frost-50">
         <div className="container mx-auto px-4">
@@ -142,21 +171,42 @@ export default function HomePage() {
                 latestPosts.map(post => (
                   <div key={post.id} className="frost-card transition-transform hover:-translate-y-1 hover:shadow-lg">
                     <div className="h-48 overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1496180470114-6ef490f3ff22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw1fHwlNjBwcm9mZXNzaW9uYWwlMjAlMjQlN0Jyb2xlLnRvTG93ZXJDYXNlJTI4JTI5fGVufDB8fHx8MTc0NTU2ODcxMnww&ixlib=rb-4.0.3&q=80&w=1080" 
+                      <img 
                         src={post.imageUrl || "PLACEHOLDER"} 
                         data-image-request={!post.imageUrl ? "mobile legends gameplay action shot" : ""}
                         alt={post.title}
                         className="w-full h-full object-cover"
                       />
-                <h3 className="font-orbitron font-bold text-lg mb-1">
-                  {['Frost King', 'Ice Ranger', 'Cryo Mage', 'Blizzard', 'Glacier'][index]}
-                </h3>
-                <p className="text-frost-300 mb-2">{role}</p>
-                <p className="text-sm text-frost-100">
-                  Pro player dengan pengalaman lebih dari 3 tahun
-                </p>
-              </div>
-            ))}
+                    </div>
+                    <div className="p-4">
+                      <div className="text-sm text-frost-600 mb-2">
+                        {new Date(post.createdAt).toLocaleDateString()}
+                      </div>
+                      <h3 className="text-lg font-bold mb-2">{post.title}</h3>
+                      <p className="text-warlord-600 mb-4 line-clamp-2">
+                        {post.content.slice(0, 120)}...
+                      </p>
+                      <Link to={`/blog/${post.slug}`} className="text-frost-600 hover:text-frost-800 font-semibold text-sm inline-flex items-center cursor-pointer">
+                        Baca Selengkapnya
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-warlord-600">
+                  Belum ada berita terbaru.
+                </div>
+              )}
+            </div>
+          )}
+          
+          <div className="text-center mt-8">
+            <Link to="/blog" className="inline-block bg-frost-600 hover:bg-frost-700 text-white font-bold py-2 px-6 rounded-lg transition-colors cursor-pointer">
+              Lihat Semua Berita
+            </Link>
           </div>
         </div>
       </section>
