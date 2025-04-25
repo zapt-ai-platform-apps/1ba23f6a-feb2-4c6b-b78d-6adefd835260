@@ -89,7 +89,7 @@ export default function HomePage() {
         >
           {carouselItems.map((item, index) => (
             <SwiperSlide key={index} className="relative">
-              <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw3fHxwcm9mZXNzaW9uYWwlMjBtb2JpbGUlMjBsZWdlbmRzJTIwZS1zcG9ydHMlMjB0ZWFtJTIwcG9zaW5nJTIwdG9nZXRoZXIlMjBpbiUyMGdhbWluZyUyMGplcnNleXN8ZW58MHx8fHwxNzQ1NTY3MzUyfDA&ixlib=rb-4.0.3&q=80&w=1080" 
+              <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw0fHxlc3BvcnRzJTIwdGVhbSUyMHBvc2luZyUyMHRvZ2V0aGVyJTIwaW4lMjBnYW1pbmclMjBqZXJzZXlzfGVufDB8fHx8MTc0NTU2ODcxMnww&ixlib=rb-4.0.3&q=80&w=1080" 
                 src={item.bgImage} 
                 alt={item.bgImageAlt}
                 data-image-request={item.bgImageRequest}
@@ -142,13 +142,12 @@ export default function HomePage() {
                 latestPosts.map(post => (
                   <div key={post.id} className="frost-card transition-transform hover:-translate-y-1 hover:shadow-lg">
                     <div className="h-48 overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwzfHwlNjBtb2JpbGUlMjBsZWdlbmRzJTIwJTI0JTdCcm9sZS50b0xvd2VyQ2FzZSUyOCUyOXxlbnwwfHx8fDE3NDU1NjczNTN8MA&ixlib=rb-4.0.3&q=80&w=1080" 
+                      <img src="https://images.unsplash.com/photo-1496180470114-6ef490f3ff22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw1fHwlNjBwcm9mZXNzaW9uYWwlMjAlMjQlN0Jyb2xlLnRvTG93ZXJDYXNlJTI4JTI5fGVufDB8fHx8MTc0NTU2ODcxMnww&ixlib=rb-4.0.3&q=80&w=1080" 
                         src={post.imageUrl || "PLACEHOLDER"} 
                         data-image-request={!post.imageUrl ? "mobile legends gameplay action shot" : ""}
                         alt={post.title}
                         className="w-full h-full object-cover"
                       />
-                </div>
                 <h3 className="font-orbitron font-bold text-lg mb-1">
                   {['Frost King', 'Ice Ranger', 'Cryo Mage', 'Blizzard', 'Glacier'][index]}
                 </h3>
@@ -159,6 +158,80 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+      
+      {/* Match Results */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-orbitron font-bold mb-8 text-center">
+            Hasil Pertandingan Terbaru
+          </h2>
+          
+          {loading ? (
+            <div className="flex justify-center">
+              <div className="frost-loading frost-loading-lg"></div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {matches.length > 0 ? (
+                matches.map(match => (
+                  <div key={match.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-frost-100">
+                    <div className="p-4">
+                      <div className="text-sm text-frost-600 mb-2">
+                        {new Date(match.matchDate).toLocaleDateString()}
+                      </div>
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="text-center">
+                          <div className="font-bold text-xl">FW</div>
+                          <div className="font-bold text-2xl text-frost-600">{match.ourScore || "-"}</div>
+                        </div>
+                        <div className="text-center">VS</div>
+                        <div className="text-center">
+                          <div className="font-bold text-xl">{match.opponent}</div>
+                          <div className="font-bold text-2xl text-warlord-600">{match.opponentScore || "-"}</div>
+                        </div>
+                      </div>
+                      <div className={`text-center py-1 px-2 rounded-full ${
+                        match.matchResult === 'win' ? 'bg-green-100 text-green-800' : 
+                        match.matchResult === 'loss' ? 'bg-red-100 text-red-800' : 
+                        'bg-gray-100 text-gray-800'
+                      }`}>
+                        {match.matchResult === 'win' ? 'Menang' : 
+                         match.matchResult === 'loss' ? 'Kalah' : 
+                         'Tertunda'}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-warlord-600">
+                  Belum ada hasil pertandingan.
+                </div>
+              )}
+            </div>
+          )}
+          
+          <div className="text-center mt-8">
+            <Link to="/dashboard/matches" className="inline-block bg-frost-600 hover:bg-frost-700 text-white font-bold py-2 px-6 rounded-lg transition-colors cursor-pointer">
+              Lihat Semua Pertandingan
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      {/* Call to Action */}
+      <section className="py-16 bg-gradient-to-r from-frost-800 to-ice-800 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-4xl font-orbitron font-bold mb-4">
+            Siap Bergabung dengan Frost Warlord?
+          </h2>
+          <p className="text-lg mb-8 max-w-2xl mx-auto">
+            Kami selalu mencari bakat baru untuk bergabung dengan tim kami. Apakah Anda siap untuk mengambil tantangan?
+          </p>
+          <Link to="/register" className="bg-white text-frost-800 hover:bg-frost-100 font-bold py-3 px-8 rounded-lg transition-colors text-lg cursor-pointer">
+            Daftar Sekarang
+          </Link>
         </div>
       </section>
     </div>
